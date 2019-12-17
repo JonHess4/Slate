@@ -1,0 +1,42 @@
+<form [formGroup]="loginForm" class="login-form-grid" (ngSubmit)="onSubmit()">
+
+	<label class="username text-input-box">
+		<i class="glyphicon glyphicon-user"></i>
+		<input type="text" formControlName="username" placeholder="Username">
+	</label>
+
+	<label class="email text-input-box">
+		<i class="glyphicon glyphicon-envelope"></i>
+		<input type="email" formControlName="email" placeholder="email@example.com">
+	</label>
+
+	<label class="password text-input-box">
+		<i class="glyphicon glyphicon-lock"></i>
+		<input type="password" formControlName="password" placeholder="Password">
+	</label>
+
+	<span class="radio-btns">
+		<label>
+			<input type="radio" formControlName="loginType" value="Sign In!">
+			Sign In
+		</label>
+		<label>
+			<input type="radio" formControlName="loginType" value="Create Account!">
+			Create Account
+		</label>
+	</span>
+
+	<button type="submit" class="btn btn-primary login-btn" [disabled]="!loginForm.valid">
+		{{loginForm.value.loginType}}
+	</button>
+
+	<label class="remember-box">
+		<input type="checkbox" formControlName="rememberBox">
+		Remember Me
+	</label>
+
+	<div class="backdrop">
+		<!-- this element is for creating a backdrop to put the form on top of -->
+	</div>
+
+</form>

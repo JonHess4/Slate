@@ -1,0 +1,101 @@
+/** Grid Stuff */
+
+.login-form-grid {
+	display: grid;
+	grid-template-columns: 1fr [backdrop-start] 50px 18em 50px [backdrop-end] 1fr;
+	grid-template-rows: 1fr [backdrop-start] 50px auto auto auto auto auto auto 50px [backdrop-end] 1fr;
+	grid-template-areas: 
+		". .      .       . ."
+		". .      .       . ."
+		". .   username   . ."
+		". .    email     . ."
+		". .   password   . ."
+		". .  radio-btns  . ."
+		". .  login-btn   . ."
+		". . remember-box . ."
+		". .      .       . ."
+		". .      .       . .";
+	justify-content: center;
+	gap: 10px;
+}
+
+.username {grid-area: username;}
+
+.email {grid-area: email;}
+
+.password {grid-area: password;}
+
+.radio-btns {grid-area: radio-btns;}
+
+.login-btn {grid-area: login-btn;}
+
+.remember-box {grid-area: remember-box;}
+
+.username, .email, .password, 
+.radio-btns, .login-btn, .remember-box {
+	z-index: 1;
+}
+
+.backdrop {
+	grid-column-start: backdrop-start;
+	grid-column-end: backdrop-end;
+	grid-row-start: backdrop-start;
+	grid-row-end: backdrop-end;
+	z-index: 0;
+	background-color: #eee;
+	border-radius: 5px;
+	box-shadow: inset 10px 10px 20px 20px #ccc;
+}
+
+/** End of Grid Stuff */
+
+/** Radio Button Stuff */
+
+.radio-btns {
+	text-align: center; // centers the children elements which contain the radio buttons and their text, not the text as the name would imply
+}
+
+.radio-btns label {
+	padding: 0px 10px 0px 10px;
+	cursor: pointer;
+}
+
+.radio-btns input {
+	cursor: pointer;
+}
+
+/** End Radio Button Stuff */
+
+/** Submit Button Stuff */
+
+.login-btn {
+	outline: none;
+	border: none;
+	color: black;
+	background-color: #fff;
+	box-shadow: inset 1px 1px 10px 1px #999;
+	border-bottom: 1px solid #999;
+	border-right: 1px solid #999;
+	height: min-content;
+}
+
+.login-btn:hover {
+	box-shadow: inset 1px 1px 10px 3px #999;
+}
+
+.login-btn:active {
+	box-shadow: inset 2px 2px 10px 5px #999;
+	transform: translateY(1px) translateX(1px);
+	width: 99%;
+	height: 99%;
+}
+
+/** End of Submit Button Stuff */
+
+/** Remember Box Stuff */
+
+.remember-box {
+	cursor: pointer;
+}
+
+/** End Remember Box Stuff */

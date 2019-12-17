@@ -1,0 +1,13 @@
+.post-list-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-auto-rows: auto;
+	text-align: center;
+}
+
+.post-item {
+	background-color: #eee;
+	border-radius: 5px;
+	background: radial-gradient(farthest-corner at 1px 1px, #888 0%, #eee 100%);
+	margin: 0px 10px 10px 10px;
+}

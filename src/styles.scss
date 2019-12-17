@@ -1,1 +1,44 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css");
+
+html, body {
+	height: 100%;
+	font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+}
+
+/** Text Input Field Stuff */
+
+.text-input-box {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-template-rows: auto;
+	grid-template-areas: 
+		"icon text-box";
+	align-content: center;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: white;
+	width: 98%;
+	padding: 0;
+	height: min-content;
+}
+
+.text-input-box i {
+	margin: 0;
+	padding: 5px 8px 5px 8px;
+	height: 95%;
+	align-self: center;
+	color: #555;
+	background-color: white;
+	border-radius: 5px 0px 0px 5px;
+}
+
+.text-input-box input {
+	border: none;
+	border-left: 1px solid #ccc;
+	outline: none;
+	padding: 5px;
+	background-color: white;
+	border-radius: 0px 5px 5px 0px;
+}
+
+/** End of Text Input Field Stuff */

@@ -5,7 +5,12 @@
     "arrow-parens": false,
     "deprecation": {
       "severity": "warning"
-    },
+	},
+	"indent": [
+		true,
+		"tabs",
+		1
+	],
     "component-class-suffix": true,
     "contextual-lifecycle": true,
     "directive-class-suffix": true,
@@ -43,7 +48,7 @@
         ]
       }
     ],
-    "no-consecutive-blank-lines": false,
+    "no-consecutive-blank-lines": true,
     "no-console": [
       true,
       "debug",

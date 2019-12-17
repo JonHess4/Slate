@@ -1,0 +1,21 @@
+<div class="navbar-grid">
+
+	<span class="logo routerLink" [routerLink]="['/']" [routerLinkActive]="['activeRoute']"
+		[routerLinkActiveOptions]="{exact:true}">Slate</span>
+
+	<span class="posts routerLink" [routerLink]="['/posts']" [routerLinkActive]="['activeRoute']">Posts</span>
+
+	<form class="search text-input-box" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+		<i class="glyphicon glyphicon-search" (click)="onSubmit()"></i>
+		<input type="text" formControlName="searchParam" placeholder="Search">
+	</form>
+
+	<!--eventually toggle between Login and Profile-->
+	<span *ngIf="true" class="profile routerLink" [routerLink]="['/login']"
+		[routerLinkActive]="['activeRoute']">Login</span>
+	<span *ngIf="false" class="profile routerLink" [routerLink]="['/profile']"
+		[routerLinkActive]="['activeRoute']">Profile</span>
+
+	<hr>
+
+</div>
