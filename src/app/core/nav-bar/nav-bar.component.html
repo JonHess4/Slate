@@ -6,7 +6,7 @@
 	<span class="posts routerLink" [routerLink]="['/posts']" [routerLinkActive]="['activeRoute']">Posts</span>
 
 	<form class="search text-input-box" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
-		<i class="glyphicon glyphicon-search" (click)="onSubmit()"></i>
+		<span class="iconWrapper"  (click)="onSubmit()"><i class="glyphicon glyphicon-search"></i></span>
 		<input type="text" formControlName="searchParam" placeholder="Search">
 	</form>
 

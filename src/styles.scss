@@ -10,7 +10,7 @@ html, body {
 .text-input-box {
 	display: grid;
 	grid-template-columns: auto 1fr;
-	grid-template-rows: auto;
+	grid-template-rows: 1fr;
 	grid-template-areas: 
 		"icon text-box";
 	align-content: center;
