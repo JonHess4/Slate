@@ -1,69 +1,36 @@
+@import "../../../environments/environment.scss";
+
 /* grid stuff */
 
 .navbar-grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
-	grid-template-rows: 1fr;
+	grid-template-rows: $navbar-height;
 	grid-template-areas:
 		"logo posts search profile";
-	justify-items: center;
-	align-items: center;
-	
-	height: 100%;
 	color: white;
 }
 
-.logo {
-	grid-area: logo;
-}
+.logo { grid-area: logo; }
 
-.posts {
-	grid-area: posts;
-	border-right: 1px solid #fff;
-}
+.posts { grid-area: posts; }
 
-.search {
-	grid-area: search;
-	min-width: min-content;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(255, 255, 255, .1);
-}
+.search { grid-area: search; }
 
-.search input {
-	min-width: 0px;
-	background-color: rgba(255, 255, 255, .1);
-	color: white;
-
-}
-
-.search .iconWrapper {
-	background-color: white;
-	border-radius: 4px 0px 0px 4px;
-	background-color: rgba(255, 255, 255, .1);
-	padding-top: 7px;
-}
-
-.search .iconWrapper i {
-	background-color: rgba(255, 255, 255, .0);
-}
-
-.profile {
-	grid-area: profile;
-}
+.profile { grid-area: profile; }
 
 /* end grid stuff */
 
 /* router link stuff */
 
 .routerLink {
-	border-left: 1px solid #fff;
+	border-left: 1px solid rgba(255, 255, 255, .5);
 	outline: none;
-	margin: 0px;
 	width: 100%;
-	height: 100%;
+	height: $navbar-height;
+	font-size: $icon-height;
 	text-align: center;
-	padding: 12px; // this padding is used to center the text vertically
+	padding: ($navbar-height - $icon-height) / 2;
 }
 
 .routerLink:hover {
@@ -77,18 +44,6 @@
 
 /* end router link stuff */
 
-/* icon styling */
-
-.iconWrapper:hover {
-	cursor: pointer;
-}
-
-.iconWrapper:active {
-	box-shadow: -1px -1px 3px 2px #ccc inset;
-}
-
-/* end icon styling */ 
-
 /* sliding underline stuff */ 
 
 #phase-in, #phase-out {
@@ -96,7 +51,7 @@
 	height: .25rem;
 	width: 25%;
 	top: 23px;
-	background: white;
+	background: rgba(255, 255, 255, .8);
 	border: none;
 	pointer-events: none;
 }
@@ -104,13 +59,13 @@
 #phase-in {
 	margin-left: -25%;
 	visibility: hidden;
-	transition: margin-left .3s .2s;
+	transition: margin-left .3s;
 }
 
 #phase-out {
 	margin-left: 100%;
 	visibility: visible;
-	transition: .3s ease-in-out, margin-left .3s .2s;
+	transition: .3s ease-in-out, margin-left .3s;
 }
 
 .logo:hover ~ #phase-in, .posts:hover ~ #phase-in, .search:hover ~ #phase-in, .profile:hover ~ #phase-in {

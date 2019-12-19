@@ -1,9 +1,11 @@
+@import "../../environments/environment.scss";
+
 /** Grid Stuff */
 
 .login-form-grid {
 	display: grid;
 	grid-template-columns: 1fr [backdrop-start] 50px 18em 50px [backdrop-end] 1fr;
-	grid-template-rows: 1fr [backdrop-start] 50px auto auto auto auto auto auto 50px [backdrop-end] 1fr;
+	grid-template-rows: 5% [backdrop-start] 50px auto auto auto auto auto auto 50px [backdrop-end] 1fr;
 	grid-template-areas: 
 		". .      .       . ."
 		". .      .       . ."
@@ -15,7 +17,6 @@
 		". . remember-box . ."
 		". .      .       . ."
 		". .      .       . .";
-	justify-content: center;
 	gap: 10px;
 }
 
@@ -49,6 +50,37 @@
 
 /** End of Grid Stuff */
 
+/** Text Input Field Stuff */
+
+.text-input-box {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-template-rows: 1fr;
+	grid-template-areas:
+		"icon text-box";
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: white;
+	color: black;
+}
+
+.text-input-box i {
+	padding: 5px 8px 5px 8px;
+	font-size: $icon-height;
+	align-self: center;
+	color: #555;
+}
+
+.text-input-box input {
+	border: none;
+	border-left: 1px solid #ccc;
+	outline: none;
+	padding: 5px;
+	border-radius: 0px 5px 5px 0px;
+}
+
+/** End of Text Input Field Stuff */
+
 /** Radio Button Stuff */
 
 .radio-btns {
@@ -68,7 +100,7 @@
 
 /** Submit Button Stuff */
 
-.login-btn {
+button.login-btn {
 	outline: none;
 	border: none;
 	color: black;
@@ -79,13 +111,16 @@
 	height: min-content;
 }
 
-.login-btn:hover {
+button.login-btn:hover {
+	background-color: white;
 	box-shadow: inset 1px 1px 10px 3px #999;
 }
 
-.login-btn:active {
-	box-shadow: inset 2px 2px 10px 5px #999;
+button.login-btn:active {
+	box-shadow: inset 2px 2px 10px 5px #555;
 	transform: translateY(1px) translateX(1px);
+	outline: none;
+	color: black;
 	width: 99%;
 	height: 99%;
 }
