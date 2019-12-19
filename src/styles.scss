@@ -2,7 +2,23 @@
 
 html, body {
 	height: 100%;
-	font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+}
+
+body {
+	background-image: url('./assets/dave-zuZy4FGHCII-unsplash.jpg');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: auto 100%;
+	background-position: right;
+	background-color:rgba(0, 0, 0, 1);
+
+	font-family: "Goudy Old Style", Garamond, "Big Caslon", "Times New Roman", serif; 
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 700;
+	color: white;
+
+	z-index: 0;
 }
 
 /** Text Input Field Stuff */
@@ -11,7 +27,7 @@ html, body {
 	display: grid;
 	grid-template-columns: auto 1fr;
 	grid-template-rows: 1fr;
-	grid-template-areas: 
+	grid-template-areas:
 		"icon text-box";
 	align-content: center;
 	border: 1px solid #ccc;
@@ -42,3 +58,4 @@ html, body {
 }
 
 /** End of Text Input Field Stuff */
+

@@ -1,15 +1,16 @@
+/* grid stuff */
+
 .navbar-grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	grid-template-rows: 1fr;
-	grid-template-areas: 
+	grid-template-areas:
 		"logo posts search profile";
 	justify-items: center;
 	align-items: center;
 	
 	height: 100%;
-	background-color: #fff;
-	background: radial-gradient(farthest-corner at 1px 1px, #aaa 0%, #eee 100%);
+	color: white;
 }
 
 .logo {
@@ -24,20 +25,36 @@
 .search {
 	grid-area: search;
 	min-width: min-content;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(255, 255, 255, .1);
 }
 
 .search input {
 	min-width: 0px;
+	background-color: rgba(255, 255, 255, .1);
+	color: white;
+
 }
 
 .search .iconWrapper {
 	background-color: white;
 	border-radius: 4px 0px 0px 4px;
+	background-color: rgba(255, 255, 255, .1);
+	padding-top: 7px;
+}
+
+.search .iconWrapper i {
+	background-color: rgba(255, 255, 255, .0);
 }
 
 .profile {
 	grid-area: profile;
 }
+
+/* end grid stuff */
+
+/* router link stuff */
 
 .routerLink {
 	border-left: 1px solid #fff;
@@ -54,48 +71,72 @@
 }
 
 .activeRoute {
-	border-bottom: .25rem solid black;
+	background-color: rgba(255, 255, 255, .2);
+	transition: .15s ease-in-out;
 }
+
+/* end router link stuff */
+
+/* icon styling */
 
 .iconWrapper:hover {
 	cursor: pointer;
 }
 
 .iconWrapper:active {
-	box-shadow: -1px -1px 3px #ccc inset;
+	box-shadow: -1px -1px 3px 2px #ccc inset;
 }
 
-hr {
+/* end icon styling */ 
+
+/* sliding underline stuff */ 
+
+#phase-in, #phase-out {
+	position: absolute;
+	height: .25rem;
+	width: 25%;
+	top: 23px;
+	background: white;
+	border: none;
+	pointer-events: none;
+}
+
+#phase-in {
+	margin-left: -25%;
 	visibility: hidden;
+	transition: margin-left .3s .2s;
 }
 
-.navbar-grid:hover hr {
+#phase-out {
+	margin-left: 100%;
+	visibility: visible;
+	transition: .3s ease-in-out, margin-left .3s .2s;
+}
+
+.logo:hover ~ #phase-in, .posts:hover ~ #phase-in, .search:hover ~ #phase-in, .profile:hover ~ #phase-in {
 	visibility: visible;
 	transition: .3s ease-in-out;
 }
 
-.logo:hover ~ hr, .posts:hover ~ hr,.profile:hover ~ hr {
-	position: absolute;
-	height: .25rem;
-	width: 25%;
-	top: 24px;
-	background: black;
-	border: none;
-	transition: .3s ease-in-out;
+.logo:hover ~ #phase-out, .posts:hover ~ #phase-out, .search:hover ~ #phase-out, .profile:hover ~ #phase-out {
+	visibility: hidden;
+	transition: 0s;
 }
 
-.logo:hover ~ hr {
+.logo:hover ~ #phase-in, .logo:hover ~ #phase-out {
 	margin-left: 0%;
 }
 
-.posts:hover ~ hr {
+.posts:hover ~ #phase-in, .posts:hover ~ #phase-out {
 	margin-left: 25%;
 }
 
-// .search:hover ~ hr {
-// 	margin-left: 50%;
-// }
+.search:hover ~ #phase-in, .search:hover ~ #phase-out {
+	margin-left: 50%;
+}
 
-.profile:hover ~ hr {
+.profile:hover ~ #phase-in, .profile:hover ~ #phase-out {
 	margin-left: 75%;
 }
+
+/* end sliding underline stuff */
