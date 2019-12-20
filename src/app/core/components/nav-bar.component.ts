@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
+import { LoginService } from '../services/login.service';
 
 @Component({
 	selector: 'app-nav-bar',
@@ -9,19 +10,14 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class NavBarComponent implements OnInit {
 
-	searchForm = new FormGroup({
-		searchParam: new FormControl('')
-	});
+	navItems: string[] = ['home', 'book', 'search', 'log-in', 'user']
 
 	constructor(
+		private loginService: LoginService,
 		private router: Router
 	) { }
 
 	ngOnInit() {
-	}
-
-	onSubmit() {
-		console.log('Searching...');
 	}
 
 }

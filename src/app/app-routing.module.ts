@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
-	{ path: 'posts', loadChildren: () => import('./post/post.module').then(m => m.PostModule) },
+	{ path: 'home', component: AppComponent },
+	{ path: 'book', loadChildren: () => import('./post/post.module').then(m => m.PostModule) },
 	{ path: 'search', loadChildren: () => import('./search/search.module').then(m=> m.SearchModule) },
-	{ path: 'profile', loadChildren: () => import('./user-profile/user-profile.module').then(m => m.UserProfileModule) },
-	{ path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) }
+	{ path: 'user', loadChildren: () => import('./user-profile/user-profile.module').then(m => m.UserProfileModule) },
+	{ path: 'log-in', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) }
 ];
 
 @NgModule({

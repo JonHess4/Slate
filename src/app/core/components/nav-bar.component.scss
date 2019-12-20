@@ -1,25 +1,15 @@
 @import "../../../environments/environment.scss";
 
+$navItems: 5;
+
 /* grid stuff */
 
 .navbar-grid {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-columns: repeat($navItems, 1fr);
 	grid-template-rows: $navbar-height;
-	grid-template-areas:
-		"logo posts search profile";
-
-	// background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-	// background-color: rgba(0, 0, 0, 1);
+	box-shadow: 0px 0px 75px 50px black;
 }
-
-.logo { grid-area: logo; }
-
-.posts { grid-area: posts; }
-
-.search { grid-area: search; }
-
-.profile { grid-area: profile; }
 
 /* end grid stuff */
 
@@ -51,35 +41,33 @@
 	position: absolute;
 	height: .15rem;
 	width: 25%;
-	top: 23px;
-	background: rgba(255, 255, 255, .8);
+	top: $navbar-height;
+	background-color: rgba(0, 0, 0, 0);
 	border: none;
 	pointer-events: none;
+	margin-top: 0px;
 }
 
 #phase-in {
 	margin-left: -25%;
-	visibility: hidden;
-	transition: margin-left .3s;
 }
 
 #phase-out {
 	margin-left: 100%;
-	visibility: visible;
-	transition: .3s ease-in-out, margin-left .3s;
+	transition: margin-left .3s ease-in-out, background-color .5s ease-in-out;
 }
 
-.logo:hover ~ #phase-in, .posts:hover ~ #phase-in, .search:hover ~ #phase-in, .profile:hover ~ #phase-in {
-	visibility: visible;
-	transition: .3s ease-in-out;
+.navbar-grid:hover #phase-in {
+	background-color: rgba(255, 255, 255, .8);
+	transition: margin-left .3s ease-in-out, background-color .5s ease-in-out;
 }
 
-.logo:hover ~ #phase-out, .posts:hover ~ #phase-out, .search:hover ~ #phase-out, .profile:hover ~ #phase-out {
-	visibility: hidden;
-	transition: 0s;
+.navbar-grid:hover #phase-out {
+	background-color: rgba(255, 255, 255, .8);
+	transition: margin-left .3s ease-in-out, background-color .5s .3s ease-in-out;
 }
 
-.logo:hover ~ #phase-in, .logo:hover ~ #phase-out {
+.navItem-0:hover ~ #phase-in, .navItem-0:hover ~ #phase-out {
 	margin-left: 0%;
 }
 
@@ -96,13 +84,3 @@
 }
 
 /* end sliding underline stuff */
-
-.navbar-grid .shade {
-	height: 150px;
-	background-image: 
-		linear-gradient(
-			rgba(0, 0, 0, .9), 
-			rgba(0, 0, 0, .6),
-			rgba(0, 0, 0, .3), 
-			rgba(0, 0, 0, 0));
-}

@@ -1,5 +1,8 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { LoginService } from '../core/services/login.service';
+import { IUser } from '../core/models/user';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-login',
@@ -16,13 +19,22 @@ export class LoginComponent implements OnInit {
 		rememberBox: new FormControl('checked')
 	});
 
-	constructor() { }
+	constructor(
+		private loginService: LoginService,
+		private router: Router
+	) { }
 
 	ngOnInit() {
 	}
 
 	onSubmit() {
-		console.log('User Embarking!');
+		let user: IUser = {
+			username: this.loginForm.value.username,
+			email: this.loginForm.value.email,
+			password: this.loginForm.value.password
+		}
+		this.loginService.login(user);
+		this.router.navigate(['/']);
 	}
 
 }

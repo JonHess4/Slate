@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { SearchComponent } from './search.component';
 import { SearchRoutingModule } from './search-routing.module';
 
-
-
 @NgModule({
   declarations: [SearchComponent],
   imports: [

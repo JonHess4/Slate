@@ -5,7 +5,7 @@
 .login-form-grid {
 	display: grid;
 	grid-template-columns: 1fr [backdrop-start] 50px 18em 50px [backdrop-end] 1fr;
-	grid-template-rows: 1fr [backdrop-start] 50px auto auto auto auto auto auto 50px [backdrop-end] 5fr;
+	grid-template-rows: 5% [backdrop-start] 50px auto auto auto auto auto auto 50px [backdrop-end] 1fr;
 	grid-template-areas: 
 		". .      .       . ."
 		". .      .       . ."
@@ -88,7 +88,7 @@
 /** Radio Button Stuff */
 
 .radio-btns {
-	text-align: center; // centers the children elements which contain the radio buttons and their text, not the text as the name would imply
+	text-align: center; // I love how text-align treats elements as text
 }
 
 .radio-btns label {
@@ -134,7 +134,8 @@ button.login-btn:active {
 }
 
 button.login-btn:disabled {
-	cursor: pointer;
+	cursor: default;
+	pointer-events: none;
 }
 
 /** End of Submit Button Stuff */
