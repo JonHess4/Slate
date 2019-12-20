@@ -5,7 +5,7 @@
 .login-form-grid {
 	display: grid;
 	grid-template-columns: 1fr [backdrop-start] 50px 18em 50px [backdrop-end] 1fr;
-	grid-template-rows: 5% [backdrop-start] 50px auto auto auto auto auto auto 50px [backdrop-end] 1fr;
+	grid-template-rows: 1fr [backdrop-start] 50px auto auto auto auto auto auto 50px [backdrop-end] 5fr;
 	grid-template-areas: 
 		". .      .       . ."
 		". .      .       . ."
@@ -18,19 +18,20 @@
 		". .      .       . ."
 		". .      .       . .";
 	gap: 10px;
+	height: 100%;
 }
 
-.username {grid-area: username;}
+.username { grid-area: username; }
 
-.email {grid-area: email;}
+.email { grid-area: email; }
 
-.password {grid-area: password;}
+.password { grid-area: password; }
 
-.radio-btns {grid-area: radio-btns;}
+.radio-btns { grid-area: radio-btns; }
 
-.login-btn {grid-area: login-btn;}
+.login-btn { grid-area: login-btn; }
 
-.remember-box {grid-area: remember-box;}
+.remember-box { grid-area: remember-box; }
 
 .username, .email, .password, 
 .radio-btns, .login-btn, .remember-box {
@@ -43,9 +44,12 @@
 	grid-row-start: backdrop-start;
 	grid-row-end: backdrop-end;
 	z-index: 0;
-	background-color: rgba(250, 250, 250, .3);
 	border-radius: 5px;
-	box-shadow: inset 10px 10px 20px 20px rgba(200, 200, 200, .3);
+	background-image: 
+		linear-gradient(to right, 
+			rgba(64, 64, 64, .25), 
+			rgba(128, 125, 128, .25), 
+			rgba(255, 255, 255, .25));
 }
 
 /** End of Grid Stuff */
@@ -103,8 +107,9 @@
 button.login-btn {
 	outline: none;
 	border: none;
+	margin: none;
 	color: black;
-	background-color: #fff;
+	background-color: white;
 	box-shadow: inset 1px 1px 10px 1px #999;
 	border-bottom: 1px solid #999;
 	border-right: 1px solid #999;
@@ -114,6 +119,9 @@ button.login-btn {
 button.login-btn:hover {
 	background-color: white;
 	box-shadow: inset 1px 1px 10px 3px #999;
+	border-bottom: 1px solid #999;
+	border-right: 1px solid #999;
+	cursor: pointer;
 }
 
 button.login-btn:active {
@@ -123,6 +131,10 @@ button.login-btn:active {
 	color: black;
 	width: 99%;
 	height: 99%;
+}
+
+button.login-btn:disabled {
+	cursor: pointer;
 }
 
 /** End of Submit Button Stuff */
