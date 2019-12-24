@@ -1,42 +1,71 @@
 <form [formGroup]="loginForm" class="login-form-grid" (ngSubmit)="onSubmit()">
 
-	<label class="username text-input-box">
-		<i class="glyphicon glyphicon-user"></i>
-		<input type="text" formControlName="username" placeholder="Username">
-	</label>
-
-	<label class="email text-input-box">
-		<i class="glyphicon glyphicon-envelope"></i>
-		<input type="email" formControlName="email" placeholder="email@example.com">
-	</label>
-
-	<label class="password text-input-box">
-		<i class="glyphicon glyphicon-lock"></i>
-		<input type="password" formControlName="password" placeholder="Password">
-	</label>
+<!-- radio buttons -->
 
 	<span class="radio-btns">
 		<label>
-			<input type="radio" formControlName="loginType" value="Sign In!">
+			<input type="radio" formControlName="loginType" value="Sign In!"tabindex="101">
 			Sign In
 		</label>
 		<label>
-			<input type="radio" formControlName="loginType" value="Create Account!">
+			<input type="radio" formControlName="loginType" value="Create Account!" tabindex="101">
 			Create Account
 		</label>
 	</span>
 
-	<button type="submit" class="btn btn-primary login-btn" [disabled]="!loginForm.valid">
+	<!-- username -->
+
+	<label class="username text-input-box" *ngIf="loginForm.value.loginType === 'Create Account!'" [ngClass]="[loginForm.get('username').invalid && loginForm.get('username').touched ? 'invalid' : '']">
+		<em>Invalid Username.</em>
+		<i class="glyphicon glyphicon-user"></i>
+		<input type="text" formControlName="username" placeholder="Username" tabindex="102">
+		<div class="input-backdrop"></div>
+	</label>
+
+	<!-- email -->
+
+	<label class="email text-input-box" [ngClass]="[loginForm.get('email').invalid && loginForm.get('email').touched ? 'invalid' : '']">
+		<em>Please enter a valid email.</em>
+		<i class="glyphicon glyphicon-envelope"></i>
+		<input type="email" id="email" formControlName="email" placeholder="email@example.com" tabindex="103">
+		<div class="input-backdrop"></div>
+	</label>
+
+	<!-- password -->
+
+	<label class="password text-input-box" [ngClass]="[loginForm.get('password').invalid && loginForm.get('password').touched ? 'invalid' : '']">
+		<em>Please enter a password</em>
+		<i class="glyphicon glyphicon-lock"></i>
+		<input [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Password" tabindex="104">
+		<i class="glyphicon" [ngClass]="[showPassword ? 'glyphicon-eye-close' : 'glyphicon-eye-open']" (click)="togglePasswordVisibility()" (keydown.enter)="togglePasswordVisibility()" tabindex="105"></i>
+		<div class="input-backdrop"></div>
+	</label>
+
+	<!-- confirm password -->
+
+	<label class="conf-password text-input-box" *ngIf="loginForm.value.loginType === 'Create Account!'" [ngClass]="[loginForm.value.confPassword !== loginForm.value.password && loginForm.get('confPassword').touched ? 'invalid' : '']">
+		<em>Passwords Must Match</em>
+		<i class="glyphicon glyphicon-lock"></i>
+		<input [type]="showPassword ? 'text' : 'password'" formControlName="confPassword" placeholder="Confirm Password" tabindex="106">
+		<i class="glyphicon" [ngClass]="[showPassword ? 'glyphicon-eye-close' : 'glyphicon-eye-open']" (click)="togglePasswordVisibility()" (keydown.enter)="togglePasswordVisibility()" tabindex="107"></i>
+		<div class="input-backdrop"></div>
+	</label>
+
+	<!-- submit button -->
+
+	<button type="submit" class="btn btn-primary login-btn" [disabled]="!loginForm.valid || (loginForm.value.confPassword !== loginForm.value.password && loginForm.value.loginType === 'Create Account!')" tabindex="108">
 		{{loginForm.value.loginType}}
 	</button>
 
+	<!-- remember me check-box -->
+
 	<label class="remember-box">
-		<input type="checkbox" formControlName="rememberBox">
+		<input type="checkbox" formControlName="rememberBox" tabindex="109">
 		Remember Me
 	</label>
 
-	<div class="backdrop">
-		<!-- this element is for creating a backdrop to put the form on top of -->
-	</div>
+	<!-- backdrop div -->
+
+	<div class="backdrop"></div>
 
 </form>

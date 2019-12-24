@@ -1,14 +1,13 @@
 @import "../../../environments/environment.scss";
 
-$navItems: 5;
-
 /* grid stuff */
 
 .navbar-grid {
 	display: grid;
-	grid-template-columns: repeat($navItems, 1fr);
+	grid-template-columns: repeat($nav-items, 1fr);
 	grid-template-rows: $navbar-height;
-	box-shadow: 0px 0px 75px 50px black;
+	background-color: rgba(0, 0, 0, .9);
+	box-shadow: 0px 0px 75px 50px rgba(0, 0, 0, 1);
 }
 
 /* end grid stuff */
@@ -19,13 +18,9 @@ $navItems: 5;
 	outline: none;
 	width: 100%;
 	height: $navbar-height;
-	font-size: $icon-height;
 	text-align: center;
+	font-size: $icon-height;
 	padding-top: ($navbar-height - $icon-height) / 2;
-	background-color: rgba(0, 0, 0, .9);
-}
-
-.routerLink:hover {
 	cursor: pointer;
 }
 
@@ -40,16 +35,16 @@ $navItems: 5;
 #phase-in, #phase-out {
 	position: absolute;
 	height: .15rem;
-	width: 25%;
+	width: percentage(1 / $nav-items);
 	top: $navbar-height;
+	margin-top: 0px;
 	background-color: rgba(0, 0, 0, 0);
 	border: none;
 	pointer-events: none;
-	margin-top: 0px;
 }
 
 #phase-in {
-	margin-left: -25%;
+	margin-left: percentage(-1 / $nav-items);
 }
 
 #phase-out {
@@ -67,20 +62,10 @@ $navItems: 5;
 	transition: margin-left .3s ease-in-out, background-color .5s .3s ease-in-out;
 }
 
-.navItem-0:hover ~ #phase-in, .navItem-0:hover ~ #phase-out {
-	margin-left: 0%;
-}
-
-.posts:hover ~ #phase-in, .posts:hover ~ #phase-out {
-	margin-left: 25%;
-}
-
-.search:hover ~ #phase-in, .search:hover ~ #phase-out {
-	margin-left: 50%;
-}
-
-.profile:hover ~ #phase-in, .profile:hover ~ #phase-out {
-	margin-left: 75%;
+@for $i from 0 through $nav-items {
+	.navbar-grid .navItem-#{$i}:hover ~ #phase-in, .navbar-grid .navItem-#{$i}:hover ~ #phase-out {
+		margin-left: percentage(($i) / $nav-items);
+	}
 }
 
 /* end sliding underline stuff */

@@ -5,37 +5,52 @@
 .login-form-grid {
 	display: grid;
 	grid-template-columns: 1fr [backdrop-start] 50px 18em 50px [backdrop-end] 1fr;
-	grid-template-rows: 5% [backdrop-start] 50px auto auto auto auto auto auto 50px [backdrop-end] 1fr;
-	grid-template-areas: 
-		". .      .       . ."
-		". .      .       . ."
-		". .   username   . ."
-		". .    email     . ."
-		". .   password   . ."
-		". .  radio-btns  . ."
-		". .  login-btn   . ."
-		". . remember-box . ."
-		". .      .       . ."
-		". .      .       . .";
-	gap: 10px;
-	height: 100%;
+	grid-template-rows: 5% [backdrop-start] 50px repeat(7, auto) 50px [backdrop-end] 1fr;
+	grid-template-areas:
+	". .      .        . ."
+	". .      .        . ."
+	". .  radio-btns   . ."
+	". .   username    . ."
+	". .    email      . ."
+	". .   password    . ."
+	". . conf-password . ."
+	". .  login-btn    . ."
+	". . remember-box  . ."
+	". .      .        . ."
+	". .      .        . .";
+gap: 15px;
+height: 100%;
 }
+
+.radio-btns { grid-area: radio-btns; }
+
+.bad-username { grid-area: bad-username; }
 
 .username { grid-area: username; }
 
+.bad-email { grid-area: bad-email; }
+
 .email { grid-area: email; }
+
+.bad-password { grid-area: bad-password; }
 
 .password { grid-area: password; }
 
-.radio-btns { grid-area: radio-btns; }
+.pass-no-match { grid-area: pass-no-match; }
+
+.conf-password { grid-area: conf-password; }
 
 .login-btn { grid-area: login-btn; }
 
 .remember-box { grid-area: remember-box; }
 
-.username, .email, .password, 
-.radio-btns, .login-btn, .remember-box {
+.radio-btns, .username, .bad-email, .email, .bad-password, .password, 
+.pass-no-match, .conf-password, .login-btn, .remember-box {
 	z-index: 1;
+}
+
+.bad-username, .bad-password, .bad-email, .pass-no-match {
+	color: red;
 }
 
 .backdrop {
@@ -48,7 +63,6 @@
 	background-image: 
 		linear-gradient(to right, 
 			rgba(64, 64, 64, .25), 
-			rgba(128, 125, 128, .25), 
 			rgba(255, 255, 255, .25));
 }
 
@@ -58,29 +72,68 @@
 
 .text-input-box {
 	display: grid;
-	grid-template-columns: auto 1fr;
-	grid-template-rows: 1fr;
+	grid-template-columns: [backdrop-start] 2em 1fr 2em [backdrop-end];
+	grid-template-rows: auto [backdrop-start] 1fr [backdrop-end];
 	grid-template-areas:
-		"icon text-box";
+		"error error error"
+		"icon text-box eye";
+}
+
+.text-input-box em { grid-area: error; }
+
+.text-input-box i:first-of-type { grid-area: icon; }
+
+.text-input-box input { grid-area: text-box; }
+
+.text-input-box i:nth-of-type(2) { grid-area: eye; }
+
+.text-input-box .input-backdrop {
+	grid-column-start: backdrop-start;
+	grid-column-end: backdrop-end;
+	grid-row-start: backdrop-start;
+	grid-row-end: backdrop-end;
+	background-color: white;
 	border: 1px solid #ccc;
 	border-radius: 5px;
-	background-color: white;
-	color: black;
+	z-index: 0;
+}
+
+.text-input-box em {
+	color: orangered;
+	display: none;
 }
 
 .text-input-box i {
-	padding: 5px 8px 5px 8px;
-	font-size: $icon-height;
+	text-align: center;
 	align-self: center;
+	font-size: $icon-height;
+	padding-left: 1px;
+	padding-bottom: 1px;
 	color: #555;
+	z-index: 1;
 }
 
 .text-input-box input {
 	border: none;
 	border-left: 1px solid #ccc;
-	outline: none;
-	padding: 5px;
 	border-radius: 0px 5px 5px 0px;
+	outline: none;
+	margin: 1px;
+	padding: 5px;
+	color: black;
+	z-index: 1;
+}
+
+.text-input-box i:nth-of-type(2) {
+	cursor: pointer;
+}
+
+.invalid .input-backdrop {
+	border: 1px solid rgba(255, 0, 0, .5);
+}
+
+.invalid em {
+	display: block;
 }
 
 /** End of Text Input Field Stuff */
@@ -88,7 +141,7 @@
 /** Radio Button Stuff */
 
 .radio-btns {
-	text-align: center; // I love how text-align treats elements as text
+	text-align: center;
 }
 
 .radio-btns label {
@@ -113,22 +166,19 @@ button.login-btn {
 	box-shadow: inset 1px 1px 10px 1px #999;
 	border-bottom: 1px solid #999;
 	border-right: 1px solid #999;
-	height: min-content;
 }
 
 button.login-btn:hover {
-	background-color: white;
 	box-shadow: inset 1px 1px 10px 3px #999;
-	border-bottom: 1px solid #999;
-	border-right: 1px solid #999;
 	cursor: pointer;
 }
 
 button.login-btn:active {
-	box-shadow: inset 2px 2px 10px 5px #555;
-	transform: translateY(1px) translateX(1px);
 	outline: none;
 	color: black;
+	background-color: white;
+	box-shadow: inset 2px 2px 10px 5px #555;
+	transform: translateY(1px) translateX(1px);
 	width: 99%;
 	height: 99%;
 }

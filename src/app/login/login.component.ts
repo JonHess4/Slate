@@ -12,12 +12,15 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
 	loginForm = new FormGroup({
+		loginType: new FormControl('Create Account!'),
 		username: new FormControl(''),
 		email: new FormControl('', [Validators.required, Validators.email]),
 		password: new FormControl('', [Validators.required]),
-		loginType: new FormControl('Sign In!'),
+		confPassword: new FormControl(''),
 		rememberBox: new FormControl('checked')
 	});
+
+	showPassword: boolean;
 
 	constructor(
 		private loginService: LoginService,
@@ -25,15 +28,26 @@ export class LoginComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
+		this.showPassword = false;
+	}
+
+	togglePasswordVisibility(): void {
+		this.showPassword = !this.showPassword;
 	}
 
 	onSubmit() {
+
 		let user: IUser = {
 			username: this.loginForm.value.username,
 			email: this.loginForm.value.email,
 			password: this.loginForm.value.password
 		}
-		this.loginService.login(user);
+
+		if (this.loginForm.value.loginType === 'Sign In!') {
+			this.loginService.signIn(user);
+		} else if (this.loginForm.value.loginType === 'Create Account!' && this.loginForm.value.password == this.loginForm.value.confPassword) {
+			this.loginService.createAccount(user);
+		}
 		this.router.navigate(['/']);
 	}
 

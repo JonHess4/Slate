@@ -4,14 +4,10 @@
 	grid-auto-rows: auto;
 	text-align: center;
 	border-radius: 5px 5px;
-	margin-left: 10%;
-	margin-right: 10%;
-	margin-top: 5%;
-	margin-bottom: 5%;
+	margin: 5% 10% 5% 10%;
 
 	background-image: 
 		linear-gradient(to right, 
 			rgba(64, 64, 64, .25), 
-			rgba(128, 125, 128, 0.25), 
 			rgba(255, 255, 255, .25));
 }
