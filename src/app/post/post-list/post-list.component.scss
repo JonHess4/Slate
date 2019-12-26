@@ -3,11 +3,11 @@
 	grid-template-columns: 1fr;
 	grid-auto-rows: auto;
 	text-align: center;
-}
+	border-radius: 5px 5px;
+	margin: 5% 10% 5% 10%;
 
-.post-item {
-	background-color: #eee;
-	border-radius: 5px;
-	background: radial-gradient(farthest-corner at 1px 1px, #888 0%, #eee 100%);
-	margin: 0px 10px 10px 10px;
+	background-image: 
+		linear-gradient(to right, 
+			rgba(64, 64, 64, .25), 
+			rgba(255, 255, 255, .25));
 }

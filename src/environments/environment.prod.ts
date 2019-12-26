@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+	navItemsLoggedIn: ['home', 'book', 'search', 'user'],
+	navItemsLoggedOut: ['home', 'book', 'search', 'log-in']
 };

@@ -1,0 +1,15 @@
+<div class="navbar-grid">
+
+	<span 
+		*ngFor="let item of navbarService.getNavItems(); let i = index" 
+		class="routerLink" [ngClass]="'navItem-' + i"
+		[routerLink]="['/' + item]" [routerLinkActive]="['activeRoute']"
+		(keydown.enter)="router.navigate(['/' + item])" tabindex="none"
+	>
+		<i class="glyphicon" [ngClass]="'glyphicon-' + item" tabindex="{{ i + 1 }}"></i>
+	</span>
+
+	<hr id="phase-in">
+	<hr id="phase-out">
+
+</div>
