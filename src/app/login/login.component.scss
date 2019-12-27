@@ -107,8 +107,8 @@ height: 100%;
 	text-align: center;
 	align-self: center;
 	font-size: $icon-height;
-	padding-left: 1px;
-	padding-bottom: 1px;
+	padding-left: 1px !important;
+	padding-bottom: 1px !important;
 	color: #555;
 	z-index: 1;
 }
@@ -137,6 +137,14 @@ height: 100%;
 }
 
 /** End of Text Input Field Stuff */
+
+/* tab focus stuff */
+
+i:focus {
+	padding-right: 0px !important;
+}
+
+/* end tab focus stuff */
 
 /** Radio Button Stuff */
 
@@ -188,7 +196,7 @@ button.login-btn:disabled {
 	pointer-events: none;
 }
 
-/** End of Submit Button Stuff */
+/** End Submit Button Stuff */
 
 /** Remember Box Stuff */
 

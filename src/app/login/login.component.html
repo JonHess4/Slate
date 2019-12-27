@@ -4,57 +4,66 @@
 
 	<span class="radio-btns">
 		<label>
-			<input type="radio" formControlName="loginType" value="Sign In!"tabindex="101">
+			<input type="radio" formControlName="isRegistering" value="" tabindex="101">
 			Sign In
 		</label>
 		<label>
-			<input type="radio" formControlName="loginType" value="Create Account!" tabindex="101">
+			<input type="radio" formControlName="isRegistering" value="true" tabindex="101">
 			Create Account
 		</label>
 	</span>
 
 	<!-- username -->
 
-	<label class="username text-input-box" *ngIf="loginForm.value.loginType === 'Create Account!'" [ngClass]="[loginForm.get('username').invalid && loginForm.get('username').touched ? 'invalid' : '']">
-		<em>Invalid Username.</em>
+	<label *ngIf="isRegistering.value" class="username text-input-box" [ngClass]="[usernameTaken ? 'invalid' : '']">
+		<em>Sorry, "{{usernameTaken}}" is already taken.</em>
 		<i class="glyphicon glyphicon-user"></i>
-		<input type="text" formControlName="username" placeholder="Username" tabindex="102">
+		<input type="text" formControlName="username" placeholder="Username" maxlength="24" tabindex="102" (focusout)="checkUsernameTaken()">
 		<div class="input-backdrop"></div>
 	</label>
 
 	<!-- email -->
 
-	<label class="email text-input-box" [ngClass]="[loginForm.get('email').invalid && loginForm.get('email').touched ? 'invalid' : '']">
-		<em>Please enter a valid email.</em>
+	<label class="email text-input-box" [ngClass]="[(email.invalid && email.touched) || (emailTaken  && isRegistering.value) ? 'invalid' : '']">
+		<em>
+			<div *ngIf="email.invalid">Please enter a valid email.</div>
+			<div *ngIf="emailTaken && isRegistering.value">Sorry, "{{emailTaken}}" is already in use.</div>
+		</em>
 		<i class="glyphicon glyphicon-envelope"></i>
-		<input type="email" id="email" formControlName="email" placeholder="email@example.com" tabindex="103">
+		<input type="email" id="email" formControlName="email" placeholder="example@email.com" maxlength="24" tabindex="103" (focusout)="checkEmailTaken()">
 		<div class="input-backdrop"></div>
 	</label>
 
 	<!-- password -->
 
-	<label class="password text-input-box" [ngClass]="[loginForm.get('password').invalid && loginForm.get('password').touched ? 'invalid' : '']">
+	<label class="password text-input-box" [ngClass]="[password.invalid && password.touched ? 'invalid' : '']">
 		<em>Please enter a password</em>
 		<i class="glyphicon glyphicon-lock"></i>
-		<input [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Password" tabindex="104">
-		<i class="glyphicon" [ngClass]="[showPassword ? 'glyphicon-eye-close' : 'glyphicon-eye-open']" (click)="togglePasswordVisibility()" (keydown.enter)="togglePasswordVisibility()" tabindex="105"></i>
+		<input [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Password" maxlength="24" tabindex="104">
+		<i class="glyphicon" [ngClass]="[showPassword ? 'glyphicon-eye-close' : 'glyphicon-eye-open']" 
+			(click)="togglePasswordVisibility()" (keydown.enter)="togglePasswordVisibility()" tabindex="105">
+		</i>
 		<div class="input-backdrop"></div>
 	</label>
 
 	<!-- confirm password -->
 
-	<label class="conf-password text-input-box" *ngIf="loginForm.value.loginType === 'Create Account!'" [ngClass]="[loginForm.value.confPassword !== loginForm.value.password && loginForm.get('confPassword').touched ? 'invalid' : '']">
+	<label *ngIf="isRegistering.value"class="conf-password text-input-box" [ngClass]="[!passValidator() && confPassword.touched ? 'invalid' : '']">
 		<em>Passwords Must Match</em>
 		<i class="glyphicon glyphicon-lock"></i>
-		<input [type]="showPassword ? 'text' : 'password'" formControlName="confPassword" placeholder="Confirm Password" tabindex="106">
-		<i class="glyphicon" [ngClass]="[showPassword ? 'glyphicon-eye-close' : 'glyphicon-eye-open']" (click)="togglePasswordVisibility()" (keydown.enter)="togglePasswordVisibility()" tabindex="107"></i>
+		<input [type]="showPassword ? 'text' : 'password'" formControlName="confPassword" placeholder="Confirm Password" maxlength="24" tabindex="106">
+		<i class="glyphicon" [ngClass]="[showPassword ? 'glyphicon-eye-close' : 'glyphicon-eye-open']" 
+			(click)="togglePasswordVisibility()" (keydown.enter)="togglePasswordVisibility()" tabindex="107">
+		</i>
 		<div class="input-backdrop"></div>
 	</label>
 
 	<!-- submit button -->
 
-	<button type="submit" class="btn btn-primary login-btn" [disabled]="!loginForm.valid || (loginForm.value.confPassword !== loginForm.value.password && loginForm.value.loginType === 'Create Account!')" tabindex="108">
-		{{loginForm.value.loginType}}
+	<button type="submit" class="btn btn-primary login-btn" tabindex="108"
+		[disabled]="!loginForm.valid || ((!passValidator() || usernameTaken || emailTaken) && isRegistering.value)"
+	>
+		{{loginForm.value.isRegistering ? 'Create Account!' : 'Sign In!'}}
 	</button>
 
 	<!-- remember me check-box -->
