@@ -18,15 +18,15 @@ export class NavBarComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
-		this.setNavItems();
+		this.setNavItems(!!this.loginService.getUser(), environment.navItemsLoggedIn, environment.navItemsLoggedOut);
 	}
 
-	setNavItems(): void {
+	setNavItems(loggedIn: boolean, loggedInNavItems: string[], loggedOutNavItems: string[]): void {
 		let navItems: string[];
-		if (this.loginService.getUser()) {
-			navItems = environment.navItemsLoggedIn;
+		if (loggedIn) {
+			navItems = loggedInNavItems;
 		} else {
-			navItems = environment.navItemsLoggedOut;
+			navItems = loggedOutNavItems;
 		}
 		this.navbarService.setNavItems(navItems);
 	}

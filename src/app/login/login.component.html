@@ -1,4 +1,4 @@
-<form [formGroup]="loginForm" class="login-form-grid" (ngSubmit)="onSubmit()">
+<form [formGroup]="loginForm" class="login-form-grid" (ngSubmit)="onSubmit(username.value, email.value, password.value)">
 
 <!-- radio buttons -->
 
@@ -18,7 +18,7 @@
 	<label *ngIf="isRegistering.value" class="username text-input-box" [ngClass]="[usernameTaken ? 'invalid' : '']">
 		<em>Sorry, "{{usernameTaken}}" is already taken.</em>
 		<i class="glyphicon glyphicon-user"></i>
-		<input type="text" formControlName="username" placeholder="Username" maxlength="24" tabindex="102" (focusout)="checkUsernameTaken()">
+		<input type="text" formControlName="username" placeholder="Username" maxlength="24" tabindex="102" (focusout)="checkUsernameTaken(username.value)">
 		<div class="input-backdrop"></div>
 	</label>
 
@@ -30,7 +30,7 @@
 			<div *ngIf="emailTaken && isRegistering.value">Sorry, "{{emailTaken}}" is already in use.</div>
 		</em>
 		<i class="glyphicon glyphicon-envelope"></i>
-		<input type="email" id="email" formControlName="email" placeholder="example@email.com" maxlength="24" tabindex="103" (focusout)="checkEmailTaken()">
+		<input type="email" id="email" formControlName="email" placeholder="example@email.com" maxlength="24" tabindex="103" (focusout)="checkEmailTaken(email.value)">
 		<div class="input-backdrop"></div>
 	</label>
 

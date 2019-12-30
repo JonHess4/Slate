@@ -52,19 +52,19 @@ export class LoginService {
     );
 	}
 
-	checkUsernameTaken(username: string): Observable<IUser> {
+	checkUsernameTaken(username: string): Observable<boolean> {
 		const url: string = this.endpointsService.GET_USERNAME_TAKEN;
-		
+
 		return this.http.get(url.replace('${username}', username)).pipe(
-			map(resp => resp as IUser)
+			map(resp => resp as boolean)
 		);
 	}
 
-	checkEmailTaken(email: string): Observable<IUser> {
+	checkEmailTaken(email: string): Observable<boolean> {
 		const url: string = this.endpointsService.GET_EMAIL_TAKEN;
 
 		return this.http.get(url.replace('${email}', email)).pipe(
-			map(resp => resp as IUser)
+			map(resp => resp as boolean)
 		);
 	}
 

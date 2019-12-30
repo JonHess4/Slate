@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { LoginService } from '../core/services/login.service';
 import { IUser } from '../core/models/user';
@@ -10,6 +11,7 @@ import { NavBarService } from '../core/services/nav-bar.service';
 	templateUrl: './login.component.html',
 	styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
 
 	loginForm = new FormGroup({
@@ -28,6 +30,7 @@ export class LoginComponent implements OnInit {
 	showPassword: boolean;
 
 	constructor(
+		private location: Location,
 		private loginService: LoginService,
 		private navbarService: NavBarService,
 		private router: Router
@@ -52,27 +55,19 @@ export class LoginComponent implements OnInit {
 		return this.loginForm.value.password === this.loginForm.value.confPassword;
 	}
 
-	checkUsernameTaken(): void {
-
-		if (this.loginForm.value.username) {
-
-			let usernameTaken = this.loginForm.value.username;
-
-			this.loginService.checkUsernameTaken(this.loginForm.value.username).subscribe(user => {
-				this.usernameTaken = user.username ? usernameTaken : '';
+	checkUsernameTaken(username: string): void {
+		if (username) {
+			this.loginService.checkUsernameTaken(username).subscribe(bool => {
+				this.usernameTaken = bool ? username : '';
 			});
 		}
 	}
 
-	checkEmailTaken(): void {
-
-		if (this.loginForm.value.email) {
-
-			let emailTaken = this.loginForm.value.email;
-
-			this.loginService.checkEmailTaken(this.loginForm.value.email).subscribe(user => {
-				this.emailTaken = user.email ? emailTaken : '';
-			})
+	checkEmailTaken(email: string): void {
+		if (email) {
+			this.loginService.checkEmailTaken(email).subscribe(bool => {
+				this.emailTaken = bool ? email : '';
+			});
 		}
 	}
 
@@ -80,56 +75,50 @@ export class LoginComponent implements OnInit {
 		this.showPassword = !this.showPassword;
 	}
 
-	onSubmit(): void {
+	onSubmit(username: string, email: string, password: string): void {
 
 		let user: IUser = {
 			id: 0,
-			username: this.loginForm.value.username,
-			email: this.loginForm.value.email,
-			password: this.loginForm.value.password
+			username: username,
+			email: email,
+			password: password
 		}
 
-		if (!this.isRegistering.value) {
-
-			this.signIn(user);
-
-		} else if (this.isRegistering.value) {
-
+		if (this.isRegistering.value) {
 			this.signUp(user);
-
+		} else {
+			this.signIn(user);
 		}
 	}
 
 	signUp(user: IUser): void {
 		this.loginService.signUp(user).subscribe(user => {
 
-			console.log(user);
-
 			if (user) {
 				this.loginSuccess(user);
 			} else {
 				console.log("Could not create user.");
 			}
+
 		});
 	}
 
 	signIn(user: IUser): void {
 		this.loginService.signIn(user).subscribe(user => {
 
-			console.log(user);
-
 			if (user) {
 				this.loginSuccess(user);
 			} else {
 				console.log('User not found.');
 			}
+
 		});
 	}
 
 	loginSuccess(user: IUser): void {
 		this.loginService.setUser(user);
 		this.navbarService.replaceNavItem('log-in', 'user');
-		this.router.navigate(['/']);
+		this.location.back();
 	}
 
 }
