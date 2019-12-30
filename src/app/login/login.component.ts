@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
 			let usernameTaken = this.loginForm.value.username;
 
 			this.loginService.checkUsernameTaken(this.loginForm.value.username).subscribe(user => {
-				this.usernameTaken = user.username ? usernameTaken : "";
+				this.usernameTaken = user.username ? usernameTaken : '';
 			});
 		}
 	}
@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
 			let emailTaken = this.loginForm.value.email;
 
 			this.loginService.checkEmailTaken(this.loginForm.value.email).subscribe(user => {
-				this.emailTaken = user.email ? emailTaken : "";
+				this.emailTaken = user.email ? emailTaken : '';
 			})
 		}
 	}
@@ -89,11 +89,11 @@ export class LoginComponent implements OnInit {
 			password: this.loginForm.value.password
 		}
 
-		if (!this.loginForm.value.isRegistering) {
+		if (!this.isRegistering.value) {
 
 			this.signIn(user);
 
-		} else if (this.loginForm.value.isRegistering && !this.usernameTaken && !this.emailTaken && this.passValidator) {
+		} else if (this.isRegistering.value) {
 
 			this.signUp(user);
 
@@ -108,6 +108,7 @@ export class LoginComponent implements OnInit {
 			if (user) {
 				this.loginSuccess(user);
 			} else {
+				console.log("Could not create user.");
 			}
 		});
 	}

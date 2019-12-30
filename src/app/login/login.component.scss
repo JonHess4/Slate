@@ -13,7 +13,7 @@
 	". .   username    . ."
 	". .    email      . ."
 	". .   password    . ."
-	". . conf-password . ."
+	". . confPassword . ."
 	". .  login-btn    . ."
 	". . remember-box  . ."
 	". .      .        . ."
@@ -38,14 +38,14 @@ height: 100%;
 
 .pass-no-match { grid-area: pass-no-match; }
 
-.conf-password { grid-area: conf-password; }
+.confPassword { grid-area: confPassword; }
 
 .login-btn { grid-area: login-btn; }
 
 .remember-box { grid-area: remember-box; }
 
 .radio-btns, .username, .bad-email, .email, .bad-password, .password, 
-.pass-no-match, .conf-password, .login-btn, .remember-box {
+.pass-no-match, .confPassword, .login-btn, .remember-box {
 	z-index: 1;
 }
 

@@ -22,7 +22,7 @@
 		<div class="input-backdrop"></div>
 	</label>
 
-	<!-- email -->
+	<!-- email  -->
 
 	<label class="email text-input-box" [ngClass]="[(email.invalid && email.touched) || (emailTaken  && isRegistering.value) ? 'invalid' : '']">
 		<em>
@@ -48,7 +48,7 @@
 
 	<!-- confirm password -->
 
-	<label *ngIf="isRegistering.value"class="conf-password text-input-box" [ngClass]="[!passValidator() && confPassword.touched ? 'invalid' : '']">
+	<label *ngIf="isRegistering.value" class="confPassword text-input-box" [ngClass]="[!passValidator() && confPassword.touched ? 'invalid' : '']">
 		<em>Passwords Must Match</em>
 		<i class="glyphicon glyphicon-lock"></i>
 		<input [type]="showPassword ? 'text' : 'password'" formControlName="confPassword" placeholder="Confirm Password" maxlength="24" tabindex="106">
@@ -63,7 +63,7 @@
 	<button type="submit" class="btn btn-primary login-btn" tabindex="108"
 		[disabled]="!loginForm.valid || ((!passValidator() || usernameTaken || emailTaken) && isRegistering.value)"
 	>
-		{{loginForm.value.isRegistering ? 'Create Account!' : 'Sign In!'}}
+		{{isRegistering.value ? 'Create Account!' : 'Sign In!'}}
 	</button>
 
 	<!-- remember me check-box -->
