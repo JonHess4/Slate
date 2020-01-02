@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import { LoginService } from '../core/services/login.service';
 import { IUser } from '../core/models/user';
 import { Router } from '@angular/router';
@@ -39,17 +39,17 @@ export class LoginComponent implements OnInit {
 	ngOnInit() {
 	}
 
-	get isRegistering(): any { return this.loginForm.get('isRegistering'); }
+	get isRegistering(): AbstractControl { return this.loginForm.get('isRegistering'); }
 
-	get username(): any { return this.loginForm.get('username'); }
+	get username(): AbstractControl { return this.loginForm.get('username'); }
 
-	get email(): any { return this.loginForm.get('email'); }
+	get email(): AbstractControl { return this.loginForm.get('email'); }
 
-	get password(): any { return this.loginForm.get('password'); }
+	get password(): AbstractControl { return this.loginForm.get('password'); }
 
-	get confPassword(): any { return this.loginForm.get('confPassword'); }
+	get confPassword(): AbstractControl { return this.loginForm.get('confPassword'); }
 
-	get rememberBox(): any { return this.loginForm.get('rememberBox'); }
+	get rememberBox(): AbstractControl { return this.loginForm.get('rememberBox'); }
 
 	passValidator() {
 		return this.loginForm.value.password === this.loginForm.value.confPassword;

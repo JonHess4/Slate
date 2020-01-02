@@ -13,30 +13,22 @@
 	". .   username    . ."
 	". .    email      . ."
 	". .   password    . ."
-	". . confPassword . ."
+	". . confPassword  . ."
 	". .  login-btn    . ."
 	". . remember-box  . ."
 	". .      .        . ."
 	". .      .        . .";
-gap: 15px;
-height: 100%;
+	gap: 15px;
+	height: 100%;
 }
 
 .radio-btns { grid-area: radio-btns; }
 
-.bad-username { grid-area: bad-username; }
-
 .username { grid-area: username; }
-
-.bad-email { grid-area: bad-email; }
 
 .email { grid-area: email; }
 
-.bad-password { grid-area: bad-password; }
-
 .password { grid-area: password; }
-
-.pass-no-match { grid-area: pass-no-match; }
 
 .confPassword { grid-area: confPassword; }
 
@@ -44,8 +36,8 @@ height: 100%;
 
 .remember-box { grid-area: remember-box; }
 
-.radio-btns, .username, .bad-email, .email, .bad-password, .password, 
-.pass-no-match, .confPassword, .login-btn, .remember-box {
+.radio-btns, .username, .email, .password, 
+.confPassword, .login-btn, .remember-box {
 	z-index: 1;
 }
 
@@ -136,14 +128,6 @@ height: 100%;
 
 /** End of Text Input Field Stuff */
 
-/* tab focus stuff */
-
-i:focus {
-	margin-right: 5px !important;
-}
-
-/* end tab focus stuff */
-
 /** Radio Button Stuff */
 
 .radio-btns {
@@ -174,7 +158,7 @@ button.login-btn {
 	border-right: 1px solid #999;
 }
 
-button.login-btn:hover {
+button.login-btn:hover, button.login-btn:focus {
 	box-shadow: inset 1px 1px 10px 3px #999;
 	cursor: pointer;
 }

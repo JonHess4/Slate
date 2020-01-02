@@ -1,6 +1,6 @@
 <form [formGroup]="loginForm" class="login-form-grid" (ngSubmit)="onSubmit(username.value, email.value, password.value)">
 
-<!-- radio buttons -->
+	<!-- radio buttons -->
 
 	<span class="radio-btns">
 		<label>
@@ -40,8 +40,9 @@
 		<em>Please enter a password</em>
 		<i class="glyphicon glyphicon-lock"></i>
 		<input [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Password" maxlength="24" tabindex="104">
-		<i class="glyphicon" [ngClass]="[showPassword ? 'glyphicon-eye-close' : 'glyphicon-eye-open']" 
-			(click)="togglePasswordVisibility()" (keydown.enter)="togglePasswordVisibility()" tabindex="105">
+		<i class="glyphicon glyphicon-eye-open"  tabindex="105"
+		(mousedown)="showPassword = true;" (mouseup)="showPassword = false;"  (mouseout)="showPassword = false;"
+		(keydown.enter)="showPassword = true;" (keyup.enter)="showPassword = false;">
 		</i>
 		<div class="input-backdrop"></div>
 	</label>
@@ -52,17 +53,16 @@
 		<em>Passwords Must Match</em>
 		<i class="glyphicon glyphicon-lock"></i>
 		<input [type]="showPassword ? 'text' : 'password'" formControlName="confPassword" placeholder="Confirm Password" maxlength="24" tabindex="106">
-		<i class="glyphicon" [ngClass]="[showPassword ? 'glyphicon-eye-close' : 'glyphicon-eye-open']" 
-			(click)="togglePasswordVisibility()" (keydown.enter)="togglePasswordVisibility()" tabindex="107">
+		<i class="glyphicon glyphicon-eye-open"  tabindex="107"
+			(mousedown)="showPassword = true;" (mouseup)="showPassword = false;" (mouseout)="showPassword = false;"
+			(keydown.enter)="showPassword = true;" (keyup.enter)="showPassword = false;">
 		</i>
 		<div class="input-backdrop"></div>
 	</label>
 
 	<!-- submit button -->
 
-	<button type="submit" class="btn btn-primary login-btn" tabindex="108"
-		[disabled]="!loginForm.valid || ((!passValidator() || usernameTaken || emailTaken) && isRegistering.value)"
-	>
+	<button type="submit" class="btn btn-primary login-btn" tabindex="108" [disabled]="!loginForm.valid || ((!passValidator() || usernameTaken || emailTaken) && isRegistering.value)">
 		{{isRegistering.value ? 'Create Account!' : 'Sign In!'}}
 	</button>
 
