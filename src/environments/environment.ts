@@ -4,8 +4,6 @@
 
 export const environment = {
 	production: false,
-	navItemsLoggedIn: ['home', 'book', 'search', 'user'],
-	navItemsLoggedOut: ['home', 'book', 'search', 'log-in'],
 	baseUrl: 'http://localhost:8080/'
 };
 
