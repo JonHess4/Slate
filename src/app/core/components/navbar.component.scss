@@ -25,39 +25,38 @@
 
 $duration: .3s;
 $distance: $navbar-height;
-$easeOutBack: cubic-bezier(0.175, 0.885, 0.320, 1.275);
 
-span {
+.navbar-item {
   position: relative;
 
   &:before, &:after {
   	content: '';
 		position: absolute;
 		opacity: 0;
-    bottom: 2px;
-		left: 0px;
-		right: 0px;
+		bottom: 0px;
+		width: 100%;
     height: 2px;
     background-color: #f0f0f0;
   }
   &:before {
-    transform: translateY(- $distance);
-    transition: transform 0s $easeOutBack, opacity 0s;
+		right: 100%;
+    transition: 0s ease-in-out, opacity 0s;
   }
   &:after {
-    transform: translateY($distance/2);
-    transition: transform $duration $easeOutBack, opacity $duration;
+		left: 100%;
+    transition: $duration ease-in-out, opacity $duration;
   }
   &:hover, &:focus {
     &:before, &:after {
       opacity: 1;
-      transform: translateY(0);
     }
     &:before {
-      transition: transform $duration $easeOutBack, opacity $duration;
+			right: 0%;
+      transition: $duration ease-in-out, opacity $duration;
     }
     &:after {
-      transition: transform 0s $duration $easeOutBack, opacity 0s $duration;
+			left: 0%;
+      transition: 0s $duration ease-in-out, opacity 0s $duration;
     }
   }
 }
