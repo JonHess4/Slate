@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PostComponent } from './post.component';
-import { PostRoutingModule } from './post-routing.module';
+import { PostComponent } from './posts.component';
+import { PostRoutingModule } from './posts-routing.module';
 import { PostListComponent } from './post-list/post-list.component';
 import { PostListItemComponent } from './post-list-item/post-list-item.component';
 

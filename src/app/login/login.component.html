@@ -18,7 +18,7 @@
 	<label *ngIf="isRegistering.value" class="username text-input-box" [ngClass]="[usernameTaken ? 'invalid' : '']">
 		<em>Sorry, "{{usernameTaken}}" is already taken.</em>
 		<i class="glyphicon glyphicon-user"></i>
-		<input type="text" formControlName="username" placeholder="Username" maxlength="24" tabindex="102" (focusout)="checkUsernameTaken(username.value)">
+		<input type="text" formControlName="username" placeholder="Username" maxlength="24" tabindex="102" (focusout)="setUsernameTaken(username.value)" (keyup)="usernameTaken ? setUsernameTaken(username.value) : null">
 		<div class="input-backdrop"></div>
 	</label>
 
@@ -30,7 +30,7 @@
 			<div *ngIf="emailTaken && isRegistering.value">Sorry, "{{emailTaken}}" is already in use.</div>
 		</em>
 		<i class="glyphicon glyphicon-envelope"></i>
-		<input type="email" id="email" formControlName="email" placeholder="example@email.com" maxlength="24" tabindex="103" (focusout)="checkEmailTaken(email.value)">
+		<input type="email" id="email" formControlName="email" placeholder="example@email.com" maxlength="320" tabindex="103" (focusout)="setEmailTaken(email.value)" (keyup)="emailTaken ? setEmailTaken(email.value) : null">
 		<div class="input-backdrop"></div>
 	</label>
 
@@ -39,7 +39,7 @@
 	<label class="password text-input-box" [ngClass]="[password.invalid && password.touched ? 'invalid' : '']">
 		<em>Please enter a password</em>
 		<i class="glyphicon glyphicon-lock"></i>
-		<input [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Password" maxlength="24" tabindex="104">
+		<input [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Password" maxlength="24" tabindex="104" (keyup)="passValidator(password.value, confPassword.value);">
 		<i class="glyphicon glyphicon-eye-open"  tabindex="105"
 		(mousedown)="showPassword = true;" (mouseup)="showPassword = false;"  (mouseout)="showPassword = false;"
 		(keydown.enter)="showPassword = true;" (keyup.enter)="showPassword = false;">
@@ -49,10 +49,10 @@
 
 	<!-- confirm password -->
 
-	<label *ngIf="isRegistering.value" class="confPassword text-input-box" [ngClass]="[!passValidator() && confPassword.touched ? 'invalid' : '']">
-		<em>Passwords Must Match</em>
+	<label *ngIf="isRegistering.value" class="confPassword text-input-box" [ngClass]="[!passMatch && confPassword.touched ? 'invalid' : '']">
+		<em>Please reenter your password</em>
 		<i class="glyphicon glyphicon-lock"></i>
-		<input [type]="showPassword ? 'text' : 'password'" formControlName="confPassword" placeholder="Confirm Password" maxlength="24" tabindex="106">
+		<input [type]="showPassword ? 'text' : 'password'" formControlName="confPassword" placeholder="Confirm Password" maxlength="24" tabindex="106" (keyup)="passValidator(password.value, confPassword.value);">
 		<i class="glyphicon glyphicon-eye-open"  tabindex="107"
 			(mousedown)="showPassword = true;" (mouseup)="showPassword = false;" (mouseout)="showPassword = false;"
 			(keydown.enter)="showPassword = true;" (keyup.enter)="showPassword = false;">
@@ -62,7 +62,7 @@
 
 	<!-- submit button -->
 
-	<button type="submit" class="btn btn-primary login-btn" tabindex="108" [disabled]="!loginForm.valid || ((!passValidator() || usernameTaken || emailTaken) && isRegistering.value)">
+	<button type="submit" class="btn btn-primary login-btn" tabindex="108" [disabled]="!loginForm.valid || ((!passMatch || usernameTaken || emailTaken) && isRegistering.value)">
 		{{isRegistering.value ? 'Create Account!' : 'Sign In!'}}
 	</button>
 

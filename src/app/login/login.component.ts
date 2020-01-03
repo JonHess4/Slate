@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
-import { LoginService } from '../core/services/login.service';
-import { IUser } from '../core/models/user';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { IUser } from '../core/models/user';
+import { LoginService } from '../core/services/login.service';
 import { NavBarService } from '../core/services/nav-bar.service';
+
 
 @Component({
 	selector: 'app-login',
@@ -17,7 +19,7 @@ export class LoginComponent implements OnInit {
 	loginForm = new FormGroup({
 		isRegistering: new FormControl('true'),
 		username: new FormControl('', Validators.maxLength(24)),
-		email: new FormControl('', [Validators.required, Validators.email, , Validators.maxLength(24)]),
+		email: new FormControl('', [Validators.required, Validators.email, , Validators.maxLength(320)]),
 		password: new FormControl('', [Validators.required, , Validators.maxLength(24)]),
 		confPassword: new FormControl(''),
 		rememberBox: new FormControl('checked')
@@ -29,11 +31,14 @@ export class LoginComponent implements OnInit {
 
 	showPassword: boolean;
 
+	passMatch: boolean;
+
 	constructor(
 		private location: Location,
 		private loginService: LoginService,
 		private navbarService: NavBarService,
-		private router: Router
+		private router: Router,
+		private snackBar: MatSnackBar
 	) { }
 
 	ngOnInit() {
@@ -51,28 +56,24 @@ export class LoginComponent implements OnInit {
 
 	get rememberBox(): AbstractControl { return this.loginForm.get('rememberBox'); }
 
-	passValidator() {
-		return this.loginForm.value.password === this.loginForm.value.confPassword;
+	passValidator(pass: string, confPass: string): void {
+		this.passMatch = (pass === confPass)
 	}
 
-	checkUsernameTaken(username: string): void {
+	setUsernameTaken(username: string): void {
 		if (username) {
-			this.loginService.checkUsernameTaken(username).subscribe(bool => {
+			this.loginService.isUsernameTaken(username).subscribe(bool => {
 				this.usernameTaken = bool ? username : '';
 			});
 		}
 	}
 
-	checkEmailTaken(email: string): void {
+	setEmailTaken(email: string): void {
 		if (email) {
-			this.loginService.checkEmailTaken(email).subscribe(bool => {
+			this.loginService.isEmailTaken(email).subscribe(bool => {
 				this.emailTaken = bool ? email : '';
 			});
 		}
-	}
-
-	togglePasswordVisibility(): void {
-		this.showPassword = !this.showPassword;
 	}
 
 	onSubmit(username: string, email: string, password: string): void {
@@ -98,6 +99,7 @@ export class LoginComponent implements OnInit {
 				this.loginSuccess(user);
 			} else {
 				console.log("Could not create user.");
+				this.snackBar.open('Could not create user.', null, { duration: 3000 });
 			}
 
 		});
@@ -110,6 +112,7 @@ export class LoginComponent implements OnInit {
 				this.loginSuccess(user);
 			} else {
 				console.log('User not found.');
+				this.snackBar.open('User not found.', null, { duration: 3000 });
 			}
 
 		});

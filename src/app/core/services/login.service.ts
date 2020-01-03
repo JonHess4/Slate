@@ -52,7 +52,7 @@ export class LoginService {
     );
 	}
 
-	checkUsernameTaken(username: string): Observable<boolean> {
+	isUsernameTaken(username: string): Observable<boolean> {
 		const url: string = this.endpointsService.GET_USERNAME_TAKEN;
 
 		return this.http.get(url.replace('${username}', username)).pipe(
@@ -60,7 +60,7 @@ export class LoginService {
 		);
 	}
 
-	checkEmailTaken(email: string): Observable<boolean> {
+	isEmailTaken(email: string): Observable<boolean> {
 		const url: string = this.endpointsService.GET_EMAIL_TAKEN;
 
 		return this.http.get(url.replace('${email}', email)).pipe(
