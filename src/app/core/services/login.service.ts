@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 import { IUser } from '../models/user';
-import { NavBarService } from './nav-bar.service';
-
 import { EndpointsService } from './endpoints.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -19,7 +16,6 @@ export class LoginService {
 	private user: IUser; // = {username: "", password: "", email: ""};
 
 	constructor(
-		private navbarService: NavBarService,
 		private http: HttpClient,
     private endpointsService: EndpointsService
 	) { }
@@ -70,6 +66,5 @@ export class LoginService {
 
 	logout() {
 		this.user = undefined;
-		this.navbarService.replaceNavItem('user', 'log-in');
 	}
 }

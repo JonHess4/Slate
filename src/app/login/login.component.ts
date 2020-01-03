@@ -5,7 +5,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { IUser } from '../core/models/user';
 import { LoginService } from '../core/services/login.service';
-import { NavBarService } from '../core/services/nav-bar.service';
 
 
 @Component({
@@ -36,7 +35,6 @@ export class LoginComponent implements OnInit {
 	constructor(
 		private location: Location,
 		private loginService: LoginService,
-		private navbarService: NavBarService,
 		private router: Router,
 		private snackBar: MatSnackBar
 	) { }
@@ -120,7 +118,6 @@ export class LoginComponent implements OnInit {
 
 	loginSuccess(user: IUser): void {
 		this.loginService.setUser(user);
-		this.navbarService.replaceNavItem('log-in', 'user');
 		this.location.back();
 	}
 
